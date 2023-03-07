@@ -1,6 +1,6 @@
 ﻿namespace Lab1
 {
-    partial class Form1
+    partial class Graf_Laborator
     {
         /// <summary>
         /// Required designer variable.
@@ -152,7 +152,7 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "label6";
             // 
-            // Form1
+            // Graf_Laborator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -169,7 +169,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
-            this.Name = "Form1";
+            this.Name = "Graf_Laborator";
             this.Text = "Reprezentare grafuri";
             this.Click += new System.EventHandler(this.Form1_Click);
             this.ResumeLayout(false);

@@ -12,30 +12,30 @@ using System.Windows.Forms;
 
 namespace Lab1
 {
-    public partial class Form1 : Form
+    public partial class Graf_Laborator : Form
     {
         Graphics g;
         Pen p;
-        int n = 0; //nr de noduri
-        ArrayList noduri = new ArrayList(); //nodurile grafului
+        int n = 0; // Numar de noduri
+        ArrayList noduri = new ArrayList(); // Nodurile grafului
         bool gata_noduri = false;
-        int arc1 = -1, arc2 = -1; //retine extremitatile unui arc (muchie)
-        int[,] a; //matricea de adiacenta
+        int arc1 = -1, arc2 = -1; // Eetine extremitatile unui arc (muchie)
+        int[,] a; // Matricea de adiacenta
         float raza = 20;
 
-        public Form1()
+        public Graf_Laborator()
         {
             InitializeComponent();
             g = CreateGraphics();
         }
 
-        //distanta intre doua puncte
+        // Distanta intre doua puncte
         private double dist(PointF x, PointF y)
         {
             return Math.Sqrt(Math.Pow(x.X - y.X, 2) + Math.Pow(x.Y - y.Y, 2));
         }
 
-        //gaseste un nod al grafului
+        // Gaseste un nod al grafului
         private int find(PointF x)
         {
             for (int i = 0; i < n; i++)
@@ -47,19 +47,16 @@ namespace Lab1
         private void Form1_Click(object sender, EventArgs e)
         {
             p = new Pen(Color.Black, 3);
-            PointF aux = this.PointToClient(new Point(Form1.MousePosition.X,
-            Form1.MousePosition.Y));
+            PointF aux = this.PointToClient(new Point(Graf_Laborator.MousePosition.X, Graf_Laborator.MousePosition.Y));
             if (gata_noduri == false)
             {
                 n++;
                 noduri.Add(aux);
-                g.DrawEllipse(p, ((PointF)noduri[n - 1]).X - raza / 2, ((PointF)noduri[n -
-                1]).Y - raza / 2, raza, raza);
+                g.DrawEllipse(p, ((PointF)noduri[n - 1]).X - raza / 2, ((PointF)noduri[n - 1]).Y - raza / 2, raza, raza);
                 PointF x = new PointF();
                 x.X = ((PointF)noduri[n - 1]).X - raza / 3;
                 x.Y = ((PointF)noduri[n - 1]).Y - raza / 3;
-                g.DrawString(n.ToString(), new Font(FontFamily.GenericSansSerif, 10), new
-                SolidBrush(Color.Black), x);
+                g.DrawString(n.ToString(), new Font(FontFamily.GenericSansSerif, 10), new SolidBrush(Color.Black), x);
             }
             else
             {
@@ -75,7 +72,7 @@ namespace Lab1
                     arc2 = poz;
                     a[arc1, arc2] = 1;
 
-                    //graf neorientat
+                    // Graf neorientat
                     if (this.radioButton2.Checked == true)
                     {
                         a[arc2, arc1] = 1;
@@ -83,16 +80,13 @@ namespace Lab1
                     }
                     else
                         p.EndCap = LineCap.ArrowAnchor;
-                    //bucla
+                    // Bucla
                     if (arc1 == arc2)
-                        g.DrawArc(p, new Rectangle((int)((PointF)noduri[arc1]).X,
-                        (int)(((PointF)noduri[arc1]).Y - raza), (int)raza, (int)raza), 180, 270);
+                        g.DrawArc(p, new Rectangle((int)((PointF)noduri[arc1]).X, (int)(((PointF)noduri[arc1]).Y - raza), (int)raza, (int)raza), 180, 270);
                     else
-                        g.DrawLine(p, ((PointF)noduri[arc1]).X + raza / 2,
-                        ((PointF)noduri[arc1]).Y, ((PointF)noduri[arc2]).X + raza / 2,
-                        ((PointF)noduri[arc2]).Y);
-                    arc1 = arc2 = -1;
+                        g.DrawLine(p, ((PointF)noduri[arc1]).X + raza / 2, ((PointF)noduri[arc1]).Y, ((PointF)noduri[arc2]).X + raza / 2, ((PointF)noduri[arc2]).Y);
 
+                    arc1 = arc2 = -1;
                 }
             }
         }
@@ -112,19 +106,21 @@ namespace Lab1
             }
         }
 
+        // LAB 1
         // ----------------------------------------------------------------------
+        // LAB 2
 
         int[] mark;
         int prim, ultim;
         string s = "";
 
-        //backtracking - initializare
+        // Backtracking - Init
         void init(int[] st, int k)
         {
             st[k] = -1;
         }
 
-        //backtracking - succesor
+        // Backtracking - Succesor
         bool succesor(int[] st, int k)
         {
             for (int i = st[k] + 1; i < n; i++)
@@ -136,7 +132,7 @@ namespace Lab1
             return false;
         }
 
-        //backtracking - valid
+        // Backtracking - Valid
         bool valid(int[] st, int k)
         {
             if ((k == 0) || (k > 0 && a[st[k - 1], st[k]] == 1))
@@ -144,7 +140,7 @@ namespace Lab1
             return false;
         }
 
-        //backtracking - solutie
+        // Backtracking - Solutie
         bool solutie(int k, int n)
         {
             if (k == n)
@@ -152,7 +148,7 @@ namespace Lab1
             return false;
         }
 
-        //backtracking - afisare solutie
+        // Backtracking - Afisare solutie
         void afisare(int[] st, int k)
         {
             if (!(st[0] == prim && st[k - 1] == ultim))
@@ -168,7 +164,7 @@ namespace Lab1
                 g.DrawLine(p, (PointF)noduri[st[i]], (PointF)noduri[st[i + 1]]);
         }
 
-        //backtracking - rutina recursiva
+        // Backtracking - Rutina recursiva
         void bt(int n, int[] st, int k)
         {
             if (solutie(k, n))
@@ -182,7 +178,7 @@ namespace Lab1
             }
         }
 
-        //determinare drum minim
+        // Determinare drum minim
         private void button1_Click(object sender, EventArgs e)
         {
             prim = Convert.ToInt32(this.textBox1.Text) - 1;
@@ -196,7 +192,7 @@ namespace Lab1
             }
             else
             {
-                //marcare noduri
+                // Marcare noduri
                 mark = new int[n];
                 for (int i = 0; i < n; i++)
                     mark[i] = 0;
@@ -216,7 +212,7 @@ namespace Lab1
                 if (mark[ultim] != 0)
                 {
                     this.label5.Text = "Drumul minim de la varful " + (prim + 1).ToString() + " la varful " + (ultim + 1).ToString() + " este de lungime " + mark[ultim] + ".";
-                    //reconstituire drum
+                    // Reconstituire drum
                     int[] st = new int[mark[ultim] + 1];
                     bt(mark[ultim] + 1, st, 0);
                 }
