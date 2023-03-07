@@ -111,5 +111,118 @@ namespace Lab1
                 this.label2.Text = "Indicati arcele / muchiile!";
             }
         }
+
+        // ----------------------------------------------------------------------
+
+        int[] mark;
+        int prim, ultim;
+        string s = "";
+
+        //backtracking - initializare
+        void init(int[] st, int k)
+        {
+            st[k] = -1;
+        }
+
+        //backtracking - succesor
+        bool succesor(int[] st, int k)
+        {
+            for (int i = st[k] + 1; i < n; i++)
+                if (mark[i] == k)
+                {
+                    st[k] = i;
+                    return true;
+                }
+            return false;
+        }
+
+        //backtracking - valid
+        bool valid(int[] st, int k)
+        {
+            if ((k == 0) || (k > 0 && a[st[k - 1], st[k]] == 1))
+                return true;
+            return false;
+        }
+
+        //backtracking - solutie
+        bool solutie(int k, int n)
+        {
+            if (k == n)
+                return true;
+            return false;
+        }
+
+        //backtracking - afisare solutie
+        void afisare(int[] st, int k)
+        {
+            if (!(st[0] == prim && st[k - 1] == ultim))
+                return;
+            if (s != "")
+                s += ";";
+            for (int i = 0; i < k; i++)
+                s += " " + (st[i] + 1).ToString();
+            this.label6.Text = s;
+            p = new Pen(Color.Red, 1);
+            p.DashStyle = DashStyle.Dot;
+            for (int i = 0; i < k - 1; i++)
+                g.DrawLine(p, (PointF)noduri[st[i]], (PointF)noduri[st[i + 1]]);
+        }
+
+        //backtracking - rutina recursiva
+        void bt(int n, int[] st, int k)
+        {
+            if (solutie(k, n))
+                afisare(st, k);
+            else
+            {
+                init(st, k);
+                while (succesor(st, k))
+                    if (valid(st, k))
+                        bt(n, st, k + 1);
+            }
+        }
+
+        //determinare drum minim
+        private void button1_Click(object sender, EventArgs e)
+        {
+            prim = Convert.ToInt32(this.textBox1.Text) - 1;
+            ultim = Convert.ToInt32(this.textBox2.Text) - 1;
+            if (prim == ultim)
+            {
+                if (a[prim, ultim] == 1)
+                    this.label5.Text = "Drumul minim de la varful " + (prim + 1).ToString() + " la varful " + (ultim + 1).ToString() + " este de lungime 1.";
+                else
+                    this.label5.Text = "Nu exista drum de la varful " + (prim + 1).ToString() + "la varful " + (ultim + 1).ToString() + "!";
+            }
+            else
+            {
+                //marcare noduri
+                mark = new int[n];
+                for (int i = 0; i < n; i++)
+                    mark[i] = 0;
+                for (int i = 0; i < n; i++)
+                    if (a[prim, i] == 1)
+                        mark[i] = 1;
+                int k = 2;
+                while (k < n)
+                {
+                    for (int i = 0; i < n; i++)
+                        for (int j = 0; j < n; j++)
+                            if (mark[i] == k - 1 && a[i, j] == 1 && (mark[j] == 0 || mark[j] > k))
+                                mark[j] = k;
+                    k++;
+                }
+
+                if (mark[ultim] != 0)
+                {
+                    this.label5.Text = "Drumul minim de la varful " + (prim + 1).ToString() + " la varful " + (ultim + 1).ToString() + " este de lungime " + mark[ultim] + ".";
+                    //reconstituire drum
+                    int[] st = new int[mark[ultim] + 1];
+                    bt(mark[ultim] + 1, st, 0);
+                }
+                else
+                    this.label5.Text = "Nu exista drum de la varful " + (prim + 1).ToString() + "la varful " + (ultim + 1).ToString() + "!";
+            }
+        }
     }
 }

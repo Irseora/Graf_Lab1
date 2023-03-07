@@ -1,11 +1,11 @@
-C:\Users\Vivi\source\repos\Lab1\bin\Debug\Lab1.exe.config
-C:\Users\Vivi\source\repos\Lab1\bin\Debug\Lab1.exe
-C:\Users\Vivi\source\repos\Lab1\bin\Debug\Lab1.pdb
 C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.csproj.AssemblyReference.cache
 C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.csproj.SuggestedBindingRedirects.cache
 C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.Form1.resources
-C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.Properties.Resources.resources
 C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.csproj.GenerateResource.cache
 C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
-C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.exe
-C:\Users\Vivi\source\repos\Lab1\obj\Debug\Lab1.pdb
+C:\Users\Vivi\source\repos\Lab1\bin\Debug\Graf_Laborator.exe.config
+C:\Users\Vivi\source\repos\Lab1\bin\Debug\Graf_Laborator.exe
+C:\Users\Vivi\source\repos\Lab1\bin\Debug\Graf_Laborator.pdb
+C:\Users\Vivi\source\repos\Lab1\obj\Debug\Graf_Laborator.Properties.Resources.resources
+C:\Users\Vivi\source\repos\Lab1\obj\Debug\Graf_Laborator.exe
+C:\Users\Vivi\source\repos\Lab1\obj\Debug\Graf_Laborator.pdb
