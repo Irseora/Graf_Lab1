@@ -19,7 +19,7 @@ namespace Lab1
         int n = 0; // Numar de noduri
         ArrayList noduri = new ArrayList(); // Nodurile grafului
         bool gata_noduri = false;
-        int arc1 = -1, arc2 = -1; // Eetine extremitatile unui arc (muchie)
+        int arc1 = -1, arc2 = -1; // Retine extremitatile unui arc (muchie)
         int[,] a; // Matricea de adiacenta
         float raza = 20;
 
